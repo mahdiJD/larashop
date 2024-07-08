@@ -60,9 +60,8 @@ class DatabaseSeeder extends Seeder
                 ]
             );
         });
-
         //seed products
-        $images = Storage::allFiles('images');
+        $images = Storage::allFiles('products');
         foreach($images as $image){
             Product::factory()->create([
                 'file' => $image,
@@ -70,8 +69,8 @@ class DatabaseSeeder extends Seeder
         }
         //seed categori
         $categories = Categorie::factory(10)->create();
-        Categorie::all()->each(function ($product) use($categories){
-            $product->tags()->attach(
+        Product::all()->each(function ($product) use($categories){
+            $product->categories()->attach(
                 $categories->pluck('id')->random(rand(2,5)),
                 [
                     'created_at' => now(),
@@ -79,6 +78,7 @@ class DatabaseSeeder extends Seeder
                 ]
             );
         });
+
 
         $users = User::all();
         Blog::all()->each(function($image) use($users){

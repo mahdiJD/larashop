@@ -24,23 +24,17 @@ class Product extends Model
         'is_published'
     ];
 
-    /*
-     * TO DO
-     * tag => category
-     * */
-    public function tags() : BelongsToMany
+
+    public function categories() : BelongsToMany
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Categorie::class);
     }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    /*
-     * TO DO
-     * comments => commentsForProduct
-     * */
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
@@ -49,53 +43,42 @@ class Product extends Model
         return $this->belongsToMany(User::class,'cart','product_id','user_id')->withTimestamps();
     }
 
-    /*
-     * TO DO
-     * tag => category
-     * */
-    public function tagLinks() : HtmlString {
+    public function categorieLinks() : HtmlString {
         $items = $this
-            ->tags()
+            ->categories()
             ->pluck('name','slug')
             ->map(function($name, $slug){
-                return "<li><a href=".route('product.tag',$slug) .">{$name}</a></li>";
+                return "<li><a href=".route('product.categorie',$slug) .">{$name}</a></li>";
             })->join("");
         return new HtmlString("<ul>{$items}</ul>");
     }
 
-    /*
-     * TO DO
-     * tag => category
-     * */
-    public function syncTags($tagString)
+
+    public function syncCategories($categorieString)
     {
-        if(!$tagString) return ;
-        $tagsId = collect(explode("," , $tagString))
+        if(!$categorieString) return ;
+        $categoriesId = collect(explode("," , $categorieString))
             ->filter()
-            ->map(function($tag){
-                $tagsObj = Tag::firstOrCreate([
-                    'name' => trim($tag),
-                    'slug' => str($tag)->slug(),
+            ->map(function($categorie){
+                $categoriesObj = Categorie::firstOrCreate([
+                    'name' => trim($categorie),
+                    'slug' => str($categorie)->slug(),
                 ]);
-                return $tagsObj->id;
+                return $categoriesObj->id;
             });
-        $this->tags()->sync($tagsId);
+        $this->categories()->sync($categoriesId);
     }
 
-    /*
-     * TO DO
-     * tag => category
-     * */
-    public function tagString() : string {
-        return $this->tags()->pluck('name')->join(',');
+    public function categorieString() : string {
+        return $this->categories()->pluck('name')->join(',');
     }
 
     public function relatedProducts($limit = 3) : mixed
     {
-        $tagsId = $this->load('tags')->tags->pluck('id');
+        $categoriesId = $this->load('categories')->categories->pluck('id');
         return Product::where('id','!=',$this->id)
-            ->whereHas('tags', function($query) use($tagsId){
-                $query->whereIn('tag_id', $tagsId);
+            ->whereHas('categories', function($query) use($categoriesId){
+                $query->whereIn('categorie_id', $categoriesId);
             })
             ->inRandomOrder()
             ->take($limit)
@@ -168,11 +151,11 @@ class Product extends Model
             Storage::delete($product->file);
         });
         static::deleting(function($product){
-            $product->tags->each(function($tag){
-                $productCount = $tag->products()->wherePivot('product_id','!=',
-                    $tag->pivot->product_id)->count();
+            $product->categories->each(function($categorie){
+                $productCount = $categorie->products()->wherePivot('product_id','!=',
+                    $categorie->pivot->product_id)->count();
                 if (!$productCount) {
-                    $tag->delete();
+                    $categorie->delete();
                 }
             });
         });

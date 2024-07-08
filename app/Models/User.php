@@ -54,12 +54,12 @@ class User extends Authenticatable
     protected static function booted() : void
     {
         static::created(function($user){
-            $user->setting()->create([
-                'email_notification' => [
-                    'new_comment' => 1,
-                    'new_image'   => 1,
-                ]
-            ]);
+//            $user->setting()->create([
+//                'email_notification' => [
+//                    'new_comment' => 1,
+//                    'new_image'   => 1,
+//                ]
+//            ]);
         });
     }
 

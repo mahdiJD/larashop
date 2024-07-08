@@ -31,7 +31,6 @@ class ProductFactory extends Factory
             'bio' => fake()->sentence(),
             'price' => rand(3,16),
             'categories' => $categories[rand(0,3)],
-            'is_published' => true ,
             'user_id' => rand(5,6),
         ];
     }

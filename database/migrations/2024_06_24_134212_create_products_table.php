@@ -15,15 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('image');
+            $table->string('file');
             $table->string('weight');
             $table->string('description');
             $table->string('bio');
-            $table->string('quality');
-            $table->string('CountryOfOrigin');
             $table->integer('price');
-            $table->string('type');
             $table->string('categories');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_categorie',function(Blueprint $table){
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('categorie_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+        Schema::create('categorie_product',function(Blueprint $table){
+            $table->foreignId('categorie_id')->constrained()
+                ->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
+            $table->foreignId('product_id')->constrained()
+                ->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('image_tag');
+        Schema::dropIfExists('categorie_product');
     }
 };
