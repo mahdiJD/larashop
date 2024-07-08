@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Enums\Role;
 use App\Models\Blog;
+use App\Models\Categorie;
 use App\Models\Comment;
+use App\Models\Product;
 use App\Models\Tag;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,6 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        //seed user and rol
         User::factory(10)->create();
         User::find([5,6])->each(function($user){
             $user->role = Role::admin;
@@ -28,6 +31,7 @@ class DatabaseSeeder extends Seeder
             $user->save();
         });
 
+        //seed blog
         $images = Storage::allFiles('images');
         foreach($images as $image){
             Blog::factory()->create([
@@ -35,6 +39,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        //seed comment
         Blog::find([1,2])->each(function($image){
             User::find([1,2,3,4,])->each(function($user) use($image){
                 $image->comments()->save(Comment::factory()->make([
@@ -44,11 +49,30 @@ class DatabaseSeeder extends Seeder
             });
         });
 
+        // seed tag adn match with blog
         $tags = Tag::factory(10)->create();
-
         Blog::all()->each(function ($blog) use($tags){
             $blog->tags()->attach(
                 $tags->pluck('id')->random(rand(2,5)),
+                [
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
+        });
+
+        //seed products
+        $images = Storage::allFiles('images');
+        foreach($images as $image){
+            Product::factory()->create([
+                'file' => $image,
+            ]);
+        }
+        //seed categori
+        $categories = Categorie::factory(10)->create();
+        Categorie::all()->each(function ($product) use($categories){
+            $product->tags()->attach(
+                $categories->pluck('id')->random(rand(2,5)),
                 [
                     'created_at' => now(),
                     'updated_at' => now(),
