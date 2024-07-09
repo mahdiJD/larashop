@@ -4,9 +4,9 @@
         <div class="row g-4">
             <div class="col-lg-12">
                 <div class="border-bottom rounded my-4">
-                                                <textarea name="body" id="" class="form-control border-0 @error('body')
-                                                is-invalid @enderror"
-                                                          cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                    <textarea name="body" id="" class="form-control border-0 
+                    @error('body')is-invalid @enderror"
+                    cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
                     @error('body')
                     <div class="invalid-feedback">
                         {{ $message }}

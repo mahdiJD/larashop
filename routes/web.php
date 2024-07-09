@@ -24,8 +24,9 @@ Route::post('/blogs/{blog:slug}/comment',[CommentController::class, 'store'])->n
 Route::get('/blogs/{blog:slug}', [BlogController::class,'show'])->name('blogs.show');
 Route::resources([
     'products' => ProductController::class ,
-    'blogs' => BlogController::class ,
+//    'blogs' => BlogController::class ,
 ]);
+Route::resource('blogs',BlogController::class)->except('show');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

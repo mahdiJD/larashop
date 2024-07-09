@@ -1,4 +1,11 @@
-<x-layout title="Create new post">
+@include('layouts.header')
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
     <div class="container-fluid mt-4">
         <div class="row">
@@ -53,6 +60,5 @@
         </div>
     </div>
 
-
-</x-layout>
+@include('layouts.footer')
 

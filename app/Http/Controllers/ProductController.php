@@ -19,11 +19,10 @@ class ProductController extends Controller
     public function index()
     {
         $products =
-            Product::published()
-                ->latest()
+            Product::latest()
                 ->paginate($this->perPage)
                 -> WithQueryString();
-        return view('Product.index', compact('products'));
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -31,6 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+//        return "<p>hi</p>";
         return view('products.create');
     }
 
@@ -51,7 +51,7 @@ class ProductController extends Controller
     {
         $relatedProducts = $product->relatedProducts();
         $comments = $product->comments()->with('user')->approved()->latest()->get();
-        return view('Product.show' , compact('product','comments','relatedProducts'));
+        return view('products.show' , compact('product','comments','relatedProducts'));
     }
 
     /**

@@ -21,7 +21,6 @@ class Product extends Model
         'user_id',
         'slug',
         'short',
-        'is_published'
     ];
 
 
@@ -99,10 +98,6 @@ class Product extends Model
         return $subFolder;
     }
 
-    public function scopePublished($query){
-        return $query->where('is_published',true);
-    }
-
     public function scopeVisibleFor($query , User $user){
         if($user->role === Role::root || $user->role === Role::admin)
             return ;
@@ -138,13 +133,11 @@ class Product extends Model
         static::creating(function ($product){
             if ($product->title){
                 $product->slug = $product->getSlug();
-                $product->is_published = true;
             }
         });
         static::updating(function ($product){
             if ($product->title && !$product->slug){
                 $product->slug = $product->getSlug();
-                $product->is_published = true;
             }
         });
         static::deleted(function($product){
