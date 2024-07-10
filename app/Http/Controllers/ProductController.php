@@ -50,8 +50,10 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $relatedProducts = $product->relatedProducts();
-        $comments = $product->comments()->with('user')->approved()->latest()->get();
-        return view('products.show' , compact('product','comments','relatedProducts'));
+        // $comments = $product->comments()->with('user')->approved()->latest()->get();
+        return view('products.show' , compact('product',
+        // 'comments',
+        'relatedProducts'));
     }
 
     /**

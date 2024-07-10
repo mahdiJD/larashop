@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <h4 class="fw-bold mb-3">{{ $product->name }}</h4>
-                                <p class="mb-3">Category: {{ $product->categories }}</p>
+                                <p class="mb-3">Category: {{ $product->categorieString() }}</p>
                                 <h5 class="fw-bold mb-3">{{ $product->price }} $</h5>
                                 <div class="d-flex mb-4">
                                     <i class="fa fa-star text-secondary"></i>
