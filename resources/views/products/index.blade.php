@@ -205,15 +205,19 @@
                             <div class="col-lg-9">
                                 <div class="row g-4 justify-content-center">
                                     @foreach ($products as $product)
-                                    <a href="{{ $product->thePermalink() }}">
+                                    
                                         <div class="col-md-6 col-lg-6 col-xl-4">
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
-                                                    <img src="{{ $product->fileURL() }}" class="img-fluid w-100 rounded-top" alt="">
+                                                    <a href="{{ $product->thePermalink() }}">
+                                                        <img src="{{ $product->fileURL() }}" class="img-fluid w-100 rounded-top" alt="">
+                                                    </a>
                                                 </div>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $product->categories }}</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>{{ $product->name }}</h4>
+                                                    <a href="{{ $product->thePermalink() }}">
+                                                        <h4>{{ $product->name }}</h4>
+                                                    </a>
                                                     <p>{{ $product->bio }}</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">${{ $product->price }} / kg</p>
@@ -222,7 +226,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
                                     @endforeach
                                     
                                     
