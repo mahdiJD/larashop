@@ -16,6 +16,13 @@ class CategorieFactory extends Factory
      */
     public function definition(): array
     {
+        $categories = [
+            'Fruits',
+            'Vegetables',
+            'Bread',
+            'Meat',
+        ];
+
         return [
             'name' => $name =fake()->unique()->word(),
             'slug' => str($name)->slug(),

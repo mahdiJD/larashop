@@ -22,10 +22,8 @@ Route::get('/testimonial', function () {
 
 Route::post('/blogs/{blog:slug}/comment',[CommentController::class, 'store'])->name('comments.store');
 Route::get('/blogs/{blog:slug}', [BlogController::class,'show'])->name('blogs.show');
-Route::resources([
-    'products' => ProductController::class ,
-//    'blogs' => BlogController::class ,
-]);
+Route::get('/products/{product:slug}', [ProductController::class,'show'])->name('products.show');
+Route::resource('products' , ProductController::class )->except('show');
 Route::resource('blogs',BlogController::class)->except('show');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

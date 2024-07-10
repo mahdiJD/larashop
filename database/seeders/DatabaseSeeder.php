@@ -68,10 +68,18 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         //seed categori
-        $categories = Categorie::factory(10)->create();
+        $Categories = [
+            'Fruits',
+            'Vegetables',
+            'Bread',
+            'Meat',
+        ];
+        foreach($Categories as $categorie)
+            $categories = Categorie::factory()->create(['name' => $categorie ,'slug' => $categorie]);
+
         Product::all()->each(function ($product) use($categories){
             $product->categories()->attach(
-                $categories->pluck('id')->random(rand(2,5)),
+                $categories->pluck('id')->random(1),
                 [
                     'created_at' => now(),
                     'updated_at' => now(),

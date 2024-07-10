@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('description');
             $table->string('bio');
             $table->integer('price');
-            $table->string('categories');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

@@ -30,7 +30,6 @@ class ProductFactory extends Factory
             'description' => fake()->realText(),
             'bio' => fake()->sentence(),
             'price' => rand(3,16),
-            'categories' => $categories[rand(0,3)],
             'user_id' => rand(5,6),
         ];
     }

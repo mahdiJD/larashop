@@ -213,7 +213,7 @@
                                                         <img src="{{ $product->fileURL() }}" class="img-fluid w-100 rounded-top" alt="">
                                                     </a>
                                                 </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $product->categories }}</div>
+                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $product->categorieString() }}</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <a href="{{ $product->thePermalink() }}">
                                                         <h4>{{ $product->name }}</h4>
