@@ -15,12 +15,13 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'title' ,
+        'name' ,
         'file',
-        'body',
+        'description',
         'user_id',
-        'slug',
-        'short',
+        'bio',
+        'price',
+        'weight',
     ];
 
 

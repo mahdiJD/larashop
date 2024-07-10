@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProducRequest extends FormRequest
@@ -11,7 +12,7 @@ class ProducRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,30 @@ class ProducRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->method()=='PUT'){
+            return [
+                'title' => 'required',
+                'tags' => 'required'
+            ];
+        }
         return [
-            //
+            'file' => 'required|image',
+            'name' => 'nullable',
+            'bio' => 'nullable',
+            'description' => 'nullable',
+            'categorie' => 'nullable',
+            'price' => 'nullable|integer',
+            'weight' => 'nullable|integer',
         ];
+    }
+    public function getData(){
+        $data = $this->validated() + [
+                'user_id' => $this->user()->id,
+            ];
+        if ($this->hasFile('file')){
+            $directory = Product::makeDirectory();
+            $data['file'] = $this->file->store($directory);
+        }
+        return $data;
     }
 }

@@ -40,7 +40,7 @@ class ProductController extends Controller
     public function store(ProducRequest $request)
     {
         $product = Product::create($data = $request->getData());
-        $product->syncTags($data['tags']);
+        $product->syncCategories($data['categorie']);
         return to_route('products.index')->with('message','products has been uploaded Successfully');
     }
 

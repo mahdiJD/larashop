@@ -70,17 +70,17 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="categories">Product Categories</label>
-                                <input type="text" id="categories" name="categories"
-                                class="form-control @error('categories')
+                                <label class="form-label" for="categorie">Product Categories</label>
+                                <input type="text" id="categorie" name="categorie"
+                                class="form-control @error('categorie')
                                 is-invalid
                                 @enderror"
-                                value="{{old('categories')}}">
-                                @error('categories')
+                                value="{{old('categorie')}}">
+                                @error('categorie')
                                 <div class="invalid-feedback"> {{$message}}</div>
                                 @enderror
                                 <div class="form-text">
-                                    Separate your categories with comma
+                                    Separate your categorie with comma
                                 </div>
                             </div>
                             <div class="mb-3">

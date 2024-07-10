@@ -14,7 +14,7 @@
                     <div class="card-header">Upload your photo</div>
 
                     <div class="card-body">
-                        <x-form action="{{route('images.store')}}" method="POST"
+                        <x-form action="{{route('blogs.store')}}" method="POST"
                         enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label class="form-label" for="file">File</label>
@@ -35,7 +35,27 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="tags">Photo Tags</label>
+                                <label class="form-label" for="body">Body</label>
+                                <textarea name="body" id="body" class="form-control border-0 
+                                    @error('body') is-invalid @enderror"
+                                    cols="30" rows="8" placeholder="Your Review *" 
+                                    spellcheck="false">{{old('body')}}</textarea>
+                                @error('body')
+                                <div class="invalid-feedback"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="short">Short</label>
+                                <textarea name="short" id="short" class="form-control border-0 
+                                    @error('short') is-invalid @enderror"
+                                    cols="30" rows="8" placeholder="Your Review *" 
+                                    spellcheck="false">{{old('short')}}</textarea>
+                                @error('short')
+                                <div class="invalid-feedback"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="tags">Blog Tags</label>
                                 <input type="text" id="tags" name="tags"
                                 class="form-control @error('tags')
                                 is-invalid
@@ -50,7 +70,7 @@
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Upload</button>
-                                <a href="{{route('images.index')}}" class="btn btn-outline-secondary">Cancel</a>
+                                <a href="{{route('products.index')}}" class="btn btn-outline-secondary">Cancel</a>
                             </div>
                         </x-form>
                     </div>

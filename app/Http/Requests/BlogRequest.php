@@ -12,7 +12,7 @@ class BlogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,6 +31,8 @@ class BlogRequest extends FormRequest
         return [
             'file' => 'required|image',
             'title' => 'nullable',
+            'short' => 'nullable',
+            'body' => 'nullable',
             'tags' => 'nullable',
         ];
     }

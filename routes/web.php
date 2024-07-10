@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use \App\Http\Controllers\ProductController;
 use \App\Http\Controllers\BlogController;
 use \App\Http\Controllers\CommentController;
+use App\Models\Product;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,8 +24,13 @@ Route::get('/testimonial', function () {
 Route::post('/blogs/{blog:slug}/comment',[CommentController::class, 'store'])->name('comments.store');
 Route::get('/blogs/{blog:slug}', [BlogController::class,'show'])->name('blogs.show');
 Route::get('/products/{product:slug}', [ProductController::class,'show'])->name('products.show');
-Route::resource('products' , ProductController::class )->except('show');
-Route::resource('blogs',BlogController::class)->except('show');
+
+Route::resource('account/products' , ProductController::class )->except('show','index');
+Route::resource('account/blogs',BlogController::class)->except('show','index');
+
+Route::get('/blogs', [BlogController::class,'index'])->name('blogs.index');
+Route::get('products', [ProductController::class,'index'])->name('products.index');
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
