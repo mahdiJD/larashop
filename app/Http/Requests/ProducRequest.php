@@ -22,12 +22,6 @@ class ProducRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method()=='PUT'){
-            return [
-                'title' => 'required',
-                'tags' => 'required'
-            ];
-        }
         return [
             'file' => 'required|image',
             'name' => 'nullable',

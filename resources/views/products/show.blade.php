@@ -56,8 +56,7 @@
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <p class="mb-4">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-                                <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish</p>
+                                <p class="mb-4">{{ $product->bio }}</p>
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
@@ -86,10 +85,7 @@
                                 </nav>
                                 <div class="tab-content mb-5">
                                     <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                            Susp endisse ultricies nisi vel quam suscipit </p>
-                                        <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic
-                                            icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.</p>
+                                        <p> {{ $product->description }} </p>
                                         <div class="px-2">
                                             <div class="row g-4">
                                                 <div class="col-6">
@@ -98,7 +94,7 @@
                                                             <p class="mb-0">Weight</p>
                                                         </div>
                                                         <div class="col-6">
-                                                            <p class="mb-0">1 kg</p>
+                                                            <p class="mb-0">{{ $product->weight }} kg</p>
                                                         </div>
                                                     </div>
                                                     <div class="row text-center align-items-center justify-content-center py-2">

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->nullable()->unique();
             $table->string('file');
-            $table->string('weight');
+            $table->integer('weight');
             $table->string('description');
             $table->string('bio');
             $table->integer('price');

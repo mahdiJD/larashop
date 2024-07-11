@@ -84,20 +84,21 @@ class ProductController extends Controller
         // }
 
         $this->authorize('delete-or-update-gate',$product);
-        return view('product.edit',compact('product'));
+        return view('products.edit',compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProducRequest $request, Product $product)
     {
         // if (Gate::denies('update')) {
         //     abort(403, "Access denied");
         // }
+        dd($request);
         $this->authorize('delete-or-update-gate',$product);
         $product->update($data = $request->getData());
-        $product->syncTags($data['tags']);
+        $product->syncCategories($data['categorie']);
         return to_route('products.index')->with('message','products has been updated successfully!');
 
     }
