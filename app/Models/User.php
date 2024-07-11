@@ -49,8 +49,8 @@ class User extends Authenticatable
     public function likes() : BelongsToMany{
         return $this->belongsToMany(Blog::class,'likes','user_id','blog_id')->withTimestamps();
     }
-    public function favorites() : BelongsToMany{
-        return $this->belongsToMany(Blog::class,'favorites','user_id','blog_id')->withTimestamps();
+    public function cart() : BelongsToMany{
+        return $this->belongsToMany(Blog::class,'cart','user_id','blog_id')->withTimestamps();
     }
 
     protected static function booted() : void

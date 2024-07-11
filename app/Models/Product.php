@@ -42,6 +42,9 @@ class Product extends Model
     public function cart() : BelongsToMany{
         return $this->belongsToMany(User::class,'cart','product_id','user_id')->withTimestamps();
     }
+    public function favorites() : BelongsToMany{
+        return $this->belongsToMany(User::class,'favorites','blog_id','user_id')->withTimestamps();
+    }
 
     public function categorieLinks() : HtmlString {
         $items = $this
