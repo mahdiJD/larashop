@@ -32,6 +32,10 @@ class BlogController extends Controller
      */
     public function create()
     {
+        // if (Gate::denies('create')) {
+        //     abort(403, "Access denied");
+        // }
+        $this->authorize('create-gate');
        return view('blogs.create');
     }
 
@@ -40,6 +44,10 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
+        // if (Gate::denies('create')) {
+        //     abort(403, "Access denied");
+        // }
+        $this->authorize('create-gate');
         $blog = Blog::create($data = $request->getData());
         $blog->syncTags($data['tags']);
         return to_route('blogs.index')->with('message','blogs has been uploaded Successfully');
@@ -60,10 +68,14 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        if(!Gate::allows('update-blog', $blog)){
-            return back()->with('message','Access Denied!');
-            // abort(403,'Access Denied!');
-        }
+        // if (Gate::denies('update')) {
+        //     abort(403, "Access denied");
+        // }
+        // if(!Gate::allows('update-blog', $blog)){
+        //     return back()->with('message','Access Denied!');
+        //     // abort(403,'Access Denied!');
+        // }
+        $this->authorize('delete-or-update-gate',$blog);
         return view('blog.edit',compact('blog'));
     }
 
@@ -72,6 +84,10 @@ class BlogController extends Controller
      */
     public function update(BlogRequest $request, Blog $blog)
     {
+        // if (Gate::denies('update')) {
+        //     abort(403, "Access denied");
+        // }
+        $this->authorize('delete-or-update-gate',$blog);
         $blog->update($data = $request->getData());
         $blog->syncTags($data['tags']);
         return to_route('blogs.index')->with('message','blogs has been updated successfully!');
@@ -82,6 +98,10 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        // if (Gate::denies('delete')) {
+        //     abort(403, "Access denied");
+        // }
+        $this->authorize('delete-or-update-gate',$blog);
         Gate::authorize('delete', $blog);
         $blog->delete();
         return to_route('blogs.index')->with('message','blogs has been deleted successfully!');

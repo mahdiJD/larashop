@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Http\Requests\ProducRequest;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -28,9 +30,20 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(User $user, Request $request,Product $product)
     {
-//        return "<p>hi</p>";
+        // if (Gate::denies('create-product')) {
+        //     // $messeg =(string) auth()->user()->role;
+        //     abort(403, 'no');
+        // }
+        $this->authorize('create-gate');
+
+        // if(!(request()->user()->role == Role::admin || request()->user()->role == Role::root)){
+        //     dd(request()->user()->role);
+        //     abort(403 , 'no');
+        // }
+        // if($user->cannot('create'))
+        //     abort(403 , 'no');
         return view('products.create');
     }
 
@@ -39,6 +52,7 @@ class ProductController extends Controller
      */
     public function store(ProducRequest $request)
     {
+        $this->authorize('create-gate');
         $product = Product::create($data = $request->getData());
         $product->syncCategories($data['categorie']);
         return to_route('products.index')->with('message','products has been uploaded Successfully');
@@ -61,10 +75,15 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        if(!Gate::allows('update-product', $product)){
-            return back()->with('message','Access Denied!');
-            // abort(403,'Access Denied!');
-        }
+        // if (Gate::denies('update')) {
+        //     abort(403, "Access denied");
+        // }
+        // if(!Gate::allows('update-product', $product)){
+        //     return back()->with('message','Access Denied!');
+        //     // abort(403,'Access Denied!');
+        // }
+
+        $this->authorize('delete-or-update-gate',$product);
         return view('product.edit',compact('product'));
     }
 
@@ -73,6 +92,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        // if (Gate::denies('update')) {
+        //     abort(403, "Access denied");
+        // }
+        $this->authorize('delete-or-update-gate',$product);
         $product->update($data = $request->getData());
         $product->syncTags($data['tags']);
         return to_route('products.index')->with('message','products has been updated successfully!');
@@ -84,6 +107,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // if (Gate::denies('delete')) {
+        //     abort(403, "Access denied");
+        // }
+        $this->authorize('delete-or-update-gate',$product);
         Gate::authorize('delete', $product);
         $product->delete();
         return to_route('products.index')->with('message','products has been deleted successfully!');
