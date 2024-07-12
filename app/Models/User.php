@@ -8,6 +8,7 @@ use App\Enums\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
@@ -46,11 +47,8 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function likes() : BelongsToMany{
-        return $this->belongsToMany(Blog::class,'likes','user_id','blog_id')->withTimestamps();
-    }
-    public function cart() : BelongsToMany{
-        return $this->belongsToMany(Blog::class,'cart','user_id','blog_id')->withTimestamps();
+    public function carts() : HasMany{
+        return $this->hasMany(Cart::class);
     }
 
     protected static function booted() : void
@@ -72,22 +70,14 @@ class User extends Authenticatable
         return $directory;
     }
 
-    public function url()
-    {
-        return route('author.show',$this->username);
-    }
+    // public function url()
+    // {
+    //     return route('author.show',$this->username);
+    // }
 
     public function profileBlogUrl(){
         return Storage::url($this->profile_image ? $this->profile_image :
             'users/user-default.png');
-    }
-
-    public function coverBlogUrl(){
-        return Storage::url($this->cover_image);
-    }
-
-    public function hasCoverBlog(){
-        return !!$this->cover_image;
     }
 
     /**

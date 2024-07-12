@@ -70,7 +70,24 @@
                                         </button>
                                     </div>
                                 </div>
-                                <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+
+
+                                <form action="{{ route('cart.store') }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="redirect_back" value="{{ url()->current() }}">
+                                    <button type="submit" class="btn border border-secondary rounded-pill 
+                                    px-4 py-2 mb-4 text-primary
+                                    @if ($product->hasInCart())
+                                    btn-success
+                                    @endif" ><i class="fa fa-shopping-bag me-2 text-primary">
+                                        </i>{{ $productInCart ? 'Remove from Cart' : 'Add to Cart' }}</button>
+                                </form>
+                                
+
+
+                                
                             </div>
                             <div class="col-lg-12">
                                 <nav>

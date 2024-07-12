@@ -39,11 +39,8 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    public function cart() : BelongsToMany{
-        return $this->belongsToMany(User::class,'cart','product_id','user_id')->withTimestamps();
-    }
-    public function favorites() : BelongsToMany{
-        return $this->belongsToMany(User::class,'favorites','blog_id','user_id')->withTimestamps();
+    public function carts() : HasMany{
+        return $this->hasMany(Cart::class);
     }
 
     public function categorieLinks() : HtmlString {
@@ -87,14 +84,6 @@ class Product extends Model
             ->take($limit)
             ->get();
     }
-    public function hasBeenFavorites()
-    {
-        $userId = auth()->id();
-        $productId = $this->id;
-        return Product::whereHas('favorites',function($query) use($userId , $productId){
-            $query->where('user_id', $userId)->where('product_id', $productId);
-        })->count();
-    }
 
     public static function makeDirectory(){
         $subFolder = 'products/' . date('y/m/d');
@@ -102,14 +91,23 @@ class Product extends Model
         return $subFolder;
     }
 
-    public function scopeVisibleFor($query , User $user){
-        if($user->role === Role::root || $user->role === Role::admin)
-            return ;
-        $query->where('user_id',$user->id);
-    }
+    // public function scopeVisibleFor($query , User $user){
+    //     if($user->role === Role::root || $user->role === Role::admin)
+    //         return ;
+    //     $query->where('user_id',$user->id);
+    // }
 
     public function fileURL(){
         return Storage::url($this->file);
+    }
+
+    public function hasInCart()
+    {
+        $userId = auth()->id();
+        $productId = $this->id;
+        return Product::whereHas('carts',function($query) use($userId , $productId){
+            $query->where('user_id', $userId)->where('product_id', $productId);
+        })->count();
     }
 
     public function thePermalink(){

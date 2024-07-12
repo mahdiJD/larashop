@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\Role;
 use App\Http\Requests\ProducRequest;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -63,11 +64,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $productInCart = Cart::where('user_id', auth()->id())
+            ->where('product_id', $product->id)
+            ->exists();
         $relatedProducts = $product->relatedProducts();
-        // $comments = $product->comments()->with('user')->approved()->latest()->get();
-        return view('products.show' , compact('product',
-        // 'comments',
-        'relatedProducts'));
+        return view('products.show' , compact('product','productInCart','relatedProducts'));
     }
 
     /**
