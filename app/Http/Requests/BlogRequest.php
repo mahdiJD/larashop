@@ -22,19 +22,17 @@ class BlogRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method()=='PUT'){
-            return [
-                'title' => 'required',
-                'tags' => 'required'
-            ];
-        }
-        return [
-            'file' => 'required|image',
+        
+        $result = [
             'title' => 'nullable',
             'short' => 'nullable',
             'body' => 'nullable',
             'tags' => 'nullable',
         ];
+        if($this->method() == 'PUT'){
+            return $result;
+        }
+        else return $result + ['file' => 'required|image'];
     }
 
     public function getData(){

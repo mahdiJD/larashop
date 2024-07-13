@@ -12,7 +12,8 @@
                 <div class="card">
                     <div class="card-header">Upload your photo</div>
                         <div class="card-body">
-                            <x-form action="{{route('products.update', $product->id)}}" method="PUT">
+                            
+                            <x-form action="{{ $product->route('update') }}" method="PUT">
                                 <div class="mb-3">
                                     <img src="{{$product->fileURL()}}" alt="{{$product->name}}" class="img-fluid">
                                 </div>

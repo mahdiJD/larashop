@@ -76,7 +76,7 @@ class BlogController extends Controller
         //     // abort(403,'Access Denied!');
         // }
         $this->authorize('delete-or-update-gate',$blog);
-        return view('blog.edit',compact('blog'));
+        return view('blogs.edit',compact('blog'));
     }
 
     /**

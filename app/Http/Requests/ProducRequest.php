@@ -22,8 +22,7 @@ class ProducRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'file' => 'required|image',
+        $result = [
             'name' => 'nullable',
             'bio' => 'nullable',
             'description' => 'nullable',
@@ -31,6 +30,10 @@ class ProducRequest extends FormRequest
             'price' => 'nullable|integer',
             'weight' => 'nullable|integer',
         ];
+        if($this->method() == 'PUT'){
+            return $result;
+        }
+        else return $result + ['file' => 'required|image'];
     }
     public function getData(){
         $data = $this->validated() + [

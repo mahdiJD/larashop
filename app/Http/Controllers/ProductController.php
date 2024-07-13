@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
-    public function __construct(protected $perPage = 5){
+    public function __construct(protected $perPage = 15){
 //        $this->middleware(['auth']);
 //        $this->authorizeResource(blogs::class);
     }
@@ -96,7 +96,6 @@ class ProductController extends Controller
         // if (Gate::denies('update')) {
         //     abort(403, "Access denied");
         // }
-        dd($request);
         $this->authorize('delete-or-update-gate',$product);
         $product->update($data = $request->getData());
         $product->syncCategories($data['categorie']);
