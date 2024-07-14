@@ -29,7 +29,7 @@ class CartController extends Controller
             Cart::create([
                 'user_id' => auth()->id(),
                 'product_id' => $request->product_id,
-                'count' => $request->quantity,
+                'count' => 1,
             ]);
             $message = 'Product added to cart successfully!';
         }
