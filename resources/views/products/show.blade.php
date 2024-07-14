@@ -57,21 +57,11 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <p class="mb-4">{{ $product->bio }}</p>
-                                <div class="input-group quantity mb-5" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-
+                                
+                                @if ($item)
+                                @include('cart.countForm')
+                                @endif
+                                
                                 <form action="{{ route('cart.store') }}" method="POST" style="display: inline;">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -82,7 +72,7 @@
                                     @if ($product->hasInCart())
                                     btn-success
                                     @endif" ><i class="fa fa-shopping-bag me-2 text-primary">
-                                        </i>{{ $productInCart ? 'Remove from Cart' : 'Add to Cart' }}</button>
+                                        </i>{{ $item ? 'Remove from Cart' : 'Add to Cart' }}</button>
                                 </form>
                                 
 

@@ -21,10 +21,15 @@ class CartRequest extends FormRequest
      */
     public function rules(): array
     {
+        if($this->method() == 'PATCH' ){
+            // dd();
+            return [
+                'cart_id' => 'required|exists:carts,id',
+                'count' => 'required|integer|min:1',
+            ];
+        }
         return [
-
             'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
         ];
     }
 }

@@ -37,14 +37,11 @@ class CartController extends Controller
         return back()->with('success', $message);
     }
 
-    public function update(CartRequest $request,Cart $cart)
+    public function update(CartRequest $request,$id)
     {
-        dd();
-        // Cart::findOrFail($id);
+        $cart = Cart::findOrFail($id);
         $cart->update(['count' => $request->count]);
-
-        dd($cart);
-        return redirect()->route('cart.index')->with('success', 'Cart updated successfully!');
+        return back()->with('success', 'Cart updated successfully!');
     }
 
     public function destroy($id)

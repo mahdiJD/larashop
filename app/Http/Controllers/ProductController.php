@@ -64,11 +64,14 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $productInCart = Cart::where('user_id', auth()->id())
-            ->where('product_id', $product->id)
-            ->exists();
+        // $productInCart = Cart::where('user_id', auth()->id())
+        //     ->where('product_id', $product->id)
+        //     ->exists(); // change to return cart
+        $item = Cart::where('user_id', auth()->id())
+            ->where('product_id', $product->id)->first();
+        // dd($item);
         $relatedProducts = $product->relatedProducts();
-        return view('products.show' , compact('product','productInCart','relatedProducts'));
+        return view('products.show' , compact('product','item','relatedProducts'));
     }
 
     /**

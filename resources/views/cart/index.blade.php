@@ -63,50 +63,7 @@
                                     </td>
                                     <td>
 
-
-
-
-                                        {{-- <div class="input-group count mt-4" style="width: 100px;">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-minus 
-                                                rounded-circle bg-light border" >
-                                                <i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <input type="text" class="form-control form-control-sm text-center border-0" value="{{ $item->count }}">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div> --}}
-
-                                        <div class="input-group count mt-4" style="width: 100px;">
-                                            <div class="input-group-btn">
-                                                <form action="{{ route('cart.update', $item->id) }}" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="count" value="{{ $item->count - 1 }}">
-                                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" {{ $item->count <= 1 ? 'disabled' : '' }}>
-                                                        <i class="fa fa-minus"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <input type="text" class="form-control form-control-sm text-center border-0 count-input" value="{{ $item->count }}" readonly>
-                                            <div class="input-group-btn">
-                                                <form action="{{ route('cart.update', $item->id) }}" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="count" value="{{ $item->count + 1 }}">
-                                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                        <i class="fa fa-plus"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        
-
-
+                                        @include('cart.countForm')
 
                                     </td>
                                     <td>
