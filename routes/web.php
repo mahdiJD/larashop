@@ -5,15 +5,13 @@ use Illuminate\Support\Facades\Auth;
 use \App\Http\Controllers\ProductController;
 use \App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use \App\Http\Controllers\CommentController;
-use App\Models\Product;
+
 
 Route::get('/', function () {
     return view('welcome');
 })->name('index');
-Route::get('/checkout', function () {
-    return view('checkout');
-})->name('checkout');
 Route::get('/testimonial', function () {
     return view('testimonial');
 })->name('testimonial');
@@ -24,6 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/cart/{id}', [CartController::class, 'update'])
     ->name('cart.update');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 });
 
 Route::post('/blogs/{blog:slug}/comment',[CommentController::class, 'store'])->name('comments.store');

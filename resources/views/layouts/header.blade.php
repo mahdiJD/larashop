@@ -68,7 +68,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
                             <a href="{{ route('cart.index') }}" class="dropdown-item">Cart</a>
-                            <a href="{{ route('checkout') }}" class="dropdown-item">Chackout</a>
+                            <a href="{{ route('checkout.index') }}" class="dropdown-item">Chackout</a>
                             <a href="{{ route('testimonial') }}" class="dropdown-item">Testimonial</a>
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div>
