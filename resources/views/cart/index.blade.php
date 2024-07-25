@@ -52,11 +52,15 @@
                                 <tr>
                                     <th scope="row">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ $item->product->fileURL() }}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                            <a href="{{ $item->product->thePermalink() }}">
+                                                <img src="{{ $item->product->fileURL() }}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                            </a>
                                         </div>
                                     </th>
                                     <td>
-                                        <p class="mb-0 mt-4">{{ $item->product->name }}</p>
+                                        <a href="{{ $item->product->thePermalink() }}">
+                                            <p class="mb-0 mt-4">{{ $item->product->name }}</p>
+                                        </a>
                                     </td>
                                     <td>
                                         <p class="mb-0 mt-4">{{ $item->product->price }} $</p>
@@ -70,8 +74,8 @@
                                         <p class="mb-0 mt-4">{{ $item->product->price * $item->count }} $</p>
                                     </td>
                                     <td>
-                                        <x-form action= >
-                                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
+                                        <x-form action="{{ route('cart.destroy' ,$item->id) }}" method='DELETE' >
+                                            <button class="btn btn-md rounded-circle bg-light border mt-4" type="submit" >
                                                 <i class="fa fa-times text-danger"></i>
                                             </button>
                                         </x-form>

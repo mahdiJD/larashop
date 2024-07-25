@@ -210,6 +210,20 @@
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
                                                     <img src="{{ $blog->fileURL() }}" class="img-fluid w-100 rounded-top" alt="{{ $blog->title }}">
+
+                                                    @canany(['update', 'delete'], $image)
+                                                    <div class="photo-buttons">
+                                                        @can('update', $image)
+                                                        <a class="btn btn-sm btn-info me-2" href="{{ $image->route('edit') }}">Edit</a>
+                                                        @endcan
+                                                        @can('delete', $image)
+                                                        <x-form method="DELETE" action="{{ route('images.destroy', $image->id) }}" style="display: inline;">
+                                                            <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Are You Sure?!')">Delete</button>
+                                                        </x-form>
+                                                        @endcan
+                                                    </div>
+                                                    @endcan
+                                                    
                                                 </div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <h4>{{ $blog->title }}</h4>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // dd(auth()->user()->role);
+        if (auth()->user()->role === Role::admin) {
+            return view('admin-panel.index');
+        }
         return view('home');
     }
 }

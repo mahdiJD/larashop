@@ -21,7 +21,7 @@
         <form action="{{ route('cart.update', $item->id) }}" method="POST" >
             @csrf
             @method('PATCH')
-            <input type="hidden"   value="{{ $item->count + 1 }}">
+            <input type="hidden" name="count" value="{{ $item->count + 1 }}">
             <input type="hidden" name="cart_id" value="{{ $item->id }}">
             <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                 <i class="fa fa-plus"></i>
