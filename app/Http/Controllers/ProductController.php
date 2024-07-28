@@ -114,7 +114,7 @@ class ProductController extends Controller
         // if (Gate::denies('delete')) {
         //     abort(403, "Access denied");
         // }
-        $this->authorize('delete-or-update-gate',$product);
+        // $this->authorize('delete-or-update-gate',$product);
         Gate::authorize('delete', $product);
         $product->delete();
         return to_route('products.index')->with('message','products has been deleted successfully!');
