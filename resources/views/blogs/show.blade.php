@@ -48,6 +48,7 @@
                             <div class="col-lg-6">
                                 <h4 class="fw-bold mb-3">{{ $blog->title }}</h4>
                                 <p class="mb-4">{{ $blog->short }}</p>
+                                @include('blogs.layouts.delete_button')
                             </div>
                             <div class="col-lg-12">
                                 <nav>

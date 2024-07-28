@@ -206,33 +206,28 @@
                                 <div class="row g-4 justify-content-center">
 
                                     @foreach($blogs as $blog)
-                                        <a href="{{ $blog->thePermalink() }}" class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="{{ $blog->fileURL() }}" class="img-fluid w-100 rounded-top" alt="{{ $blog->title }}">
-
-                                                    @canany(['update', 'delete'], $image)
-                                                    <div class="photo-buttons">
-                                                        @can('update', $image)
-                                                        <a class="btn btn-sm btn-info me-2" href="{{ $image->route('edit') }}">Edit</a>
-                                                        @endcan
-                                                        @can('delete', $image)
-                                                        <x-form method="DELETE" action="{{ route('images.destroy', $image->id) }}" style="display: inline;">
-                                                            <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Are You Sure?!')">Delete</button>
-                                                        </x-form>
-                                                        @endcan
+                                        {{-- <a href="{{ $blog->thePermalink() }}" > --}}
+                                            <div class="col-md-6 col-lg-6 col-xl-4">
+                                                <div class="rounded position-relative fruite-item">
+                                                    <div class="fruite-img">
+                                                        <a href="{{ $blog->thePermalink() }}" >
+                                                        <img src="{{ $blog->fileURL() }}" class="img-fluid w-100 rounded-top" alt="{{ $blog->title }}">
+                                                        </a>
                                                     </div>
-                                                    @endcan
-                                                    
-                                                </div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>{{ $blog->title }}</h4>
-                                                    <p>{{ $blog->short }}</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                        <h4>{{ $blog->title }}</h4>
+                                                        <p>{{ $blog->short }}</p>
+                                                        <div class="d-flex justify-content-between flex-lg-wrap">
+                                                            <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </a>
+                                        
+                                        
                                     @endforeach
 
                                     <div class="col-md-6 col-lg-6 col-xl-4">
@@ -246,7 +241,8 @@
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                                     <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                                 </div>
                                             </div>
                                         </div>

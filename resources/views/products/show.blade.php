@@ -57,6 +57,9 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <p class="mb-4">{{ $product->bio }}</p>
+                                @can('delete', $product)
+                                    @include('products.layouts.delete_button')
+                                @endcan
                                 
                                 @if ($item)
                                 @include('cart.countForm')

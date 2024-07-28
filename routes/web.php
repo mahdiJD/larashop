@@ -31,8 +31,8 @@ Route::post('/blogs/{blog:slug}/comment',[CommentController::class, 'store'])->n
 Route::get('/blogs/{blog:slug}', [BlogController::class,'show'])->name('blogs.show');
 Route::get('/products/{product:slug}', [ProductController::class,'show'])->name('products.show');
 
-Route::resource('/account/products' , ProductController::class )->except('show','index');
-Route::resource('/account/blogs',BlogController::class)->except('show','index');
+Route::resource('/products' , ProductController::class )->except('show','index');
+Route::resource('/blogs',BlogController::class)->except('show','index');
 
 Route::get('/blogs', [BlogController::class,'index'])->name('blogs.index');
 Route::get('/products', [ProductController::class,'index'])->name('products.index');

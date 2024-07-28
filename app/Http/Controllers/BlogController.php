@@ -101,7 +101,7 @@ class BlogController extends Controller
         // if (Gate::denies('delete')) {
         //     abort(403, "Access denied");
         // }
-        $this->authorize('delete-or-update-gate',$blog);
+        // $this->authorize('delete-or-update-gate',$blog);
         Gate::authorize('delete', $blog);
         $blog->delete();
         return to_route('blogs.index')->with('message','blogs has been deleted successfully!');
