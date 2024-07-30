@@ -18,7 +18,7 @@ Route::get('/testimonial', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/contact', [SettingController::class,'edit'])->name('settingShow');
-    
+
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
     Route::patch('/cart/{id}', [CartController::class, 'update'])
@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/products/create' , [ProductController::class , 'create'] )->name('products.create');
 });
 
 Route::post('/blogs/{blog:slug}/comment',[CommentController::class, 'store'])->name('comments.store');

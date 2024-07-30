@@ -36,7 +36,7 @@
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <h1 class="mb-4">Billing details</h1>
-                <form action="#">
+                <x-form action="{{route('checkout.store')}}" method="POST">
                     <div class="row g-5">
                         @include('checkout.personalDetails')
                         <div class="col-md-12 col-lg-6 col-xl-5">
@@ -62,7 +62,7 @@
                                 <div class="col-12">
                                     <div class="form-check text-start my-3">
                                         <input type="radio" class="form-check-input bg-primary border-0" 
-                                        id="Transfer-1" name="payments-method" value="Transfer" >
+                                        id="Transfer-1" name="payment_method" value="Transfer" >
                                         <label class="form-check-label" for="Transfer-1">Direct Bank Transfer</label>
                                     </div>
                                     <p class="text-start text-dark">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
@@ -71,7 +71,7 @@
                             <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
                                 <div class="col-12">
                                     <div class="form-check text-start my-3">
-                                        <input type="radio" class="form-check-input bg-primary border-0" id="Payments-1" name="payments-method" value="Payments">
+                                        <input type="radio" class="form-check-input bg-primary border-0" id="Payments-1" name="payment_method" value="Payments">
                                         <label class="form-check-label" for="Payments-1">Check Payments</label>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                             <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
                                 <div class="col-12">
                                     <div class="form-check text-start my-3">
-                                        <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1" name="payments-method" value="Delivery">
+                                        <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1" name="payment_method" value="Delivery">
                                         <label class="form-check-label" for="Delivery-1">Cash On Delivery</label>
                                     </div>
                                 </div>
@@ -87,17 +87,17 @@
                             <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
                                 <div class="col-12">
                                     <div class="form-check text-start my-3">
-                                        <input type="radio" class="form-check-input bg-primary border-0" id="Paypal-1" name="payments-method" value="Paypal" checked>
+                                        <input type="radio" class="form-check-input bg-primary border-0" id="Paypal-1" name="payment_method" value="Paypal" checked>
                                         <label class="form-check-label" for="Paypal-1">Paypal</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                                <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place Order</button>
+                                <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place Order</button>
                             </div>
                         </div>
                     </div>
-                </form>
+                </x-form>
             </div>
         </div>
         <!-- Checkout Page End -->
