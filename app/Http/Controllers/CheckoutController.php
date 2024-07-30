@@ -26,13 +26,13 @@ class CheckoutController extends Controller
     {
         $request->validate([
             'address' => 'required|string|max:255',
-            // 'payment_method' => 'required|string|max:255',
+            'payment_method' => 'required|string|max:255',
         ]);
 
         $order = Order::create([
             'user_id' => auth()->id(),
             'address' => $request->address,
-            // 'payment_method' => $request->payment_method,
+            'payment_method' => $request->payment_method,
             'total' => Cart::where('user_id', auth()->id())->sum(\DB::raw('count * price')),
         ]);
 
