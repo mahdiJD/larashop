@@ -7,7 +7,7 @@ use \App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use \App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\SettingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,6 +17,8 @@ Route::get('/testimonial', function () {
 })->name('testimonial');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/contact', [SettingController::class,'edit'])->name('settingShow');
+    
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
     Route::patch('/cart/{id}', [CartController::class, 'update'])
@@ -41,8 +43,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/tst', function () {
-    return view('admin-panel.index');
+    return view('contact');
 });
-//Route::get('/contact', function () {
-//    return view('contact');
-//});
+
