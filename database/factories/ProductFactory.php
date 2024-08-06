@@ -22,8 +22,12 @@ class ProductFactory extends Factory
             'Bread',
             'Meat',
         ];
+        do{
+            $title = substr(fake()->sentence(),20);
+        }
+        while(!$title);
         return [
-            'name' => $title = substr(fake()->sentence(),20),
+            'name' => $title ,
             'slug' => str()->slug($title),
             'file' => fake()->imageUrl($width= 1920 ,$height= 1280),
             'weight' => rand(150,250),

@@ -20,7 +20,7 @@ class CheckoutController extends Controller
     {
         $cartItems = Cart::where('user_id', auth()->id())->with('product')->get();
         $subtotal = $this->totalPrice($cartItems);
-        return view('checkout', compact('cartItems','subtotal'));
+        return view('checkout.checkout', compact('cartItems','subtotal'));
     }
 
     public function store(Request $request)

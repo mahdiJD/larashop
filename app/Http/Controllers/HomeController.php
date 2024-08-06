@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Role;
+use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(protected $perPage=15)
     {
         $this->middleware('auth');
     }
@@ -25,10 +26,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // dd(auth()->user()->role);
-        if (auth()->user()->role === Role::admin) {
-            return view('admin-panel.index');
+        if (auth()->user()->role === Role::admin || auth()->user()->role === Role::root) {
+            $order = Order::where('order_status', false )->latest()->get(5);
+            return view('admin-panel.index',compact('order',));
         }
-        return view('home');
+        $order = Order::where('user_id',auth()->user()->id)->get();
+        
+        return view('home.home' ,compact('order',));
+    }
+
+    public function orderHistory(){
+        if (auth()->user()->role === Role::admin || auth()->user()->role === Role::root) {
+            $order = Order::published()
+            ->latest()
+            ->paginate($this->perPage)
+            -> WithQueryString();;    
+            return view('admin-panel.index',compact('order',));
+        }
+        $order = Order::where('user_id',auth()->user()->id)->get();
+        
+        return view('home.home' ,compact('order',));
     }
 }
