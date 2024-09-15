@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use \App\Http\Controllers\CommentController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,7 +42,7 @@ Route::get('/blogs', [BlogController::class,'index'])->name('blogs.index');
 Route::get('/products', [ProductController::class,'index'])->name('products.index');
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/tst', function () {
     return view('contact');
