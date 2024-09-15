@@ -27,8 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->user()->role === Role::admin || auth()->user()->role === Role::root) {
-            $order = Order::where('order_status', false )->latest()->get(5);
-            return view('admin-panel.index',compact('order',));
+            $order = Order::where('order_status', false )->latest()->take(5)->get();
+            return view('admin.home',compact('order'));
         }
         $order = Order::where('user_id',auth()->user()->id)->get();
         
@@ -41,7 +41,7 @@ class HomeController extends Controller
             ->latest()
             ->paginate($this->perPage)
             -> WithQueryString();;    
-            return view('admin-panel.index',compact('order',));
+            return view('admin.index',compact('order',));
         }
         $order = Order::where('user_id',auth()->user()->id)->get();
         
