@@ -55,5 +55,9 @@ h2 {
 }
 
 .active{
-    background-color: #fff;
+    background-color: #f4f4f4;
+}
+
+.active > a:nth-child(1) {
+    color: black;
 }

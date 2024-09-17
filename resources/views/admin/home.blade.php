@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="assets/style.css">
-    
-</head>
-<body>
-    <div class="sidebar">
-        <div class="sidebar-title">
-            <img src="assets/images/user-default.png" width="16px" height="16px" alt="">
-            hello mahdi
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="#dashboard" class="">Dashboard</a></li>
-            <li><a href="#users" class="">Users</a></li>
-            <li><a href="#settings" class="">Settings</a></li>
-            <li class="active"><a href="#pages" >Pages</a></li>
-            <li><a href="#posts" class="">Posts</a></li>
-            <li><a href="#media" class="">product</a></li>
-            <li><a href="#media" class="">order</a></li>
-            <li><a href="#logout" class="">Logout</a></li>
-        </ul>
-    </div>
+@include('admin.layouts.sidbar',[$page])
     <div class="main-content">
         <header>
             <h1>Welcome to Your Admin Panel</h1>
