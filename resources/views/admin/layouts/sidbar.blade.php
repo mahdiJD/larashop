@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/style.css')}}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
 </head>
 <body>
     <div class="sidebar">
         <div class="sidebar-title">
-            <img src="assets/images/user-default.png" width="16px" height="16px" alt="">
+            <img src="{{asset('assets/images/user-default.png')}}" width="26px" height="26px" alt="">
             hello mahdi
         </div>
         <ul class="sidebar-menu">
             <li class="@if ($page =='dashboard')
                 active
             @endif"><a href="#dashboard" class="">Dashboard</a></li>
-            <li class="@if ($page =='users')
+            <li class="@if ($page =='user')
                 active
             @endif"><a href="#users" class="">Users</a></li>
             <li class="@if ($page =='settings')

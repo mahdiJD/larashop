@@ -43,6 +43,10 @@ Route::get('/products', [ProductController::class,'index'])->name('products.inde
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/user', [HomeController::class, 'show_users'])->name('show_users');
+Route::get('/home/user/{user}', [HomeController::class, ''])->name('users.show');
+Route::delete('/home/user/{user?}', [HomeController::class, 'destroy'])->name('users.destroy');
+Route::get('/home/user/{user?}', [HomeController::class, 'edit'])->name('users.edit');
 
 Route::get('/tst', function () {
     return view('contact');
