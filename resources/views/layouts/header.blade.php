@@ -20,6 +20,7 @@
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <script async src="https://www.google.com/recaptcha/api.js"></script>
 
 
     <!-- Customized Bootstrap Stylesheet -->
